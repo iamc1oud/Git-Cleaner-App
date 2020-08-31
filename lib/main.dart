@@ -64,31 +64,33 @@ class AuthScreen extends StatelessWidget {
             ],
           ),
         ),
-        preferredSize: Size.fromHeight(200),
+        preferredSize: Size.fromHeight(250),
       ),
-      body: Column(
+      body: ListView(
         children: [
           LoginFormLayout(),
           SizedBox(
             height: 15,
           ),
-          Material(
-              borderRadius: BorderRadius.circular(10),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: InkWell(
-                    onTap: () {
-                      print("Navigate to github.com/settings/apps");
-                    },
-                    child: Text(
-                      "Generate a new token",
-                      style:
-                          TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                    )),
-              ))
+          Align(
+            alignment: Alignment.center,
+            child: Material(
+                borderRadius: BorderRadius.circular(10),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: InkWell(
+                      onTap: () {
+                        print("Navigate to github.com/settings/apps");
+                      },
+                      child: Text(
+                        "Generate a new token",
+                        style:
+                            TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                      )),
+                )),
+          )
         ],
       ),
-      floatingActionButton: LoginFormLayout().submitBtn(context)
     );
   }
 }

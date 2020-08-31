@@ -25,45 +25,60 @@ class LoginFormLayout extends StatelessWidget {
         shadowColor: Colors.black.withOpacity(0.4),
         borderRadius: BorderRadius.circular(10),
         child: Consumer<LoginService>(
-          builder: (context, loginService, child) => child,
-          child: Form(
-            key: _loginFormKey,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                TextFormField(
-                  validator: (String val){
-                    if(val.isEmpty){
-                      return "Must enter username";
-                    }
-                    return "Okay";
-                  },
-                  controller: usernameController,
-                    decoration: inputDecoration('Username', Icon(Icons.account_circle, color: const Color(0xFF2A2C34),))
-                ),
-                Divider(
-                  height: 20,
-                ),
-                TextFormField(
-                    validator: (String val){
-                      if(val.isEmpty){
-                        return "Must enter oauth token";
-                      }
-                      return "Okay";
-                    },
-                  controller: oauthController,
-                  obscureText: true,
-                  obscuringCharacter: "*",
-                  onFieldSubmitted: (val){
-                    print(val);
-                  },
-                  decoration: inputDecoration('OAuth Token', Icon(Icons.vpn_key, color: const Color(0xFF2A2C34)),)
-                ),
-              ],
-            ),
-          ),
+          builder: (context, loginService, child) {
+            return Form(
+              key: _loginFormKey,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  TextFormField(
+                      validator: (String val){
+                        if(val.isEmpty){
+                          return "Must enter username";
+                        }
+                        return null;
+                      },
+                      controller: usernameController,
+                      decoration: inputDecoration('Username', Icon(Icons.account_circle, color: const Color(0xFF2A2C34),))
+                  ),
+                  Divider(
+                    height: 20,
+                  ),
+                  TextFormField(
+                      validator: (String val){
+                        if(val.isEmpty){
+                          return "Must enter oauth token";
+                        }
+                        return null;
+                      },
+                      controller: oauthController,
+                      obscureText: true,
+                      obscuringCharacter: "*",
+                      onFieldSubmitted: (val){
+                        print(val);
+                      },
+                      decoration: inputDecoration('OAuth Token', Icon(Icons.vpn_key, color: const Color(0xFF2A2C34)),)
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16.0),
+                    child:FloatingActionButton.extended(
+                        backgroundColor: ConstFloatingActionButton().lightFabColor,
+                        icon: Icon(Icons.lock_open),
+                        onPressed: () {
+                          if(_loginFormKey.currentState.validate()){
+                            loginService.setUsername(usernameController.value.text);
+                            loginService.setOauthToken(usernameController.value.text);
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+                          }
+                        },
+                        label: new Text("Authorize"))
+                  ),
+                ],
+              ),
+            );
+          },
         ),
       ),
     );
@@ -87,7 +102,7 @@ class LoginFormLayout extends StatelessWidget {
     );
   }
 
-  Widget submitBtn(BuildContext context) {
+  Widget submitBtn({BuildContext context}) {
   return FloatingActionButton.extended(
   backgroundColor: ConstFloatingActionButton().lightFabColor,
   icon: Icon(Icons.lock_open),

@@ -19,6 +19,10 @@ class LoginService extends ChangeNotifier {
     notifyListeners();
   }
 
-  String get _getUsername => this.username;
-  String get _getToken => this.oauth;
+  void testFun(){
+    print('function called');
+  }
+
+  String get getUsername => this.username;
+  String get getToken => this.oauth;
 }
