@@ -32,6 +32,7 @@ dependencies:
   stacked:
   hive: ^1.4.4
   provider:
+  dio: ^3.0.10
 
 dev_dependencies:
   flutter_test:
