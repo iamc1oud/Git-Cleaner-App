@@ -2,10 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:git_cleaner/components/homepage.dart';
+import 'package:git_cleaner/api/git_api.dart';
 import 'package:git_cleaner/components/login_form_widget.dart';
-import 'package:git_cleaner/services/loginService.dart';
-import 'package:git_cleaner/style/const.dart';
+import 'package:git_cleaner/login/loginService.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
@@ -22,8 +21,15 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => LoginService(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => LoginService(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => GitApi(),
+        ),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Git Cleaner',
@@ -39,7 +45,6 @@ class MyApp extends StatelessWidget {
 
 class AuthScreen extends StatelessWidget {
   final String title;
-  LoginService _loginService = new LoginService();
 
   AuthScreen({this.title});
 

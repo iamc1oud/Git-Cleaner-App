@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:git_cleaner/services/loginService.dart';
+import 'package:git_cleaner/login/loginService.dart';
 import 'package:git_cleaner/style/const.dart';
 import 'package:provider/provider.dart';
 
