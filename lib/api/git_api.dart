@@ -12,7 +12,7 @@ abstract class GitInterface {
   }
 }
 
-class GitApi extends ChangeNotifier implements GitInterface  {
+class GitApi implements GitInterface  {
   GitUserModel userModel;
 
   @override

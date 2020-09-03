@@ -26,9 +26,6 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => LoginService(),
         ),
-        ChangeNotifierProvider(
-          create: (context) => GitApi(),
-        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
