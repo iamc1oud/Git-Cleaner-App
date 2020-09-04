@@ -8,6 +8,7 @@ import 'package:git_cleaner/login/loginService.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -83,6 +84,15 @@ class AuthScreen extends StatelessWidget {
                   child: InkWell(
                       onTap: () {
                         print("Navigate to github.com/settings/apps");
+                        _launchUrl() async {
+                          const url = "https://github.com/settings/apps";
+                          if (await canLaunch(url)) {
+                            await launch(url);
+                          } else {
+                            throw 'Could not launch $url';
+                          }
+                        }
+                        _launchUrl();
                       },
                       child: Text(
                         "Generate a new token",

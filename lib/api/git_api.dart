@@ -1,24 +1,23 @@
-
-
 import 'dart:convert';
-
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:git_cleaner/models/repo_model.dart';
 import 'package:git_cleaner/models/user_model.dart';
+import 'package:http/http.dart' as http;
 
 abstract class GitInterface {
-  void getUserData(String token){
-
-  }
+  Future<GitUserModel> getUserData(String token) async {}
+  Future<dynamic> getUserRepository(String username, String token) async {}
 }
 
 class GitApi implements GitInterface  {
   GitUserModel userModel;
 
+
+  String tokenTemp = "4b6093b3e14113ad126c6cd9d7d942ddaff63eb9";
+
   @override
   Future<GitUserModel> getUserData(String token) async{
     String url = "https://api.github.com/user";
-    String tokenTemp = "efd9b78e3e07fde56fdf994e7b5a55a513c09054";
 
     try {
       Response response = await Dio(
@@ -31,11 +30,27 @@ class GitApi implements GitInterface  {
       ).get(url);
       final resultReponse = json.decode(response.toString());
       userModel = GitUserModel.fromJson(resultReponse);
-
     }
     catch(e){
       print(e);
     }
     return userModel;
+  }
+
+  @override
+  Future<dynamic> getUserRepository(String username, String token) async {
+    var decodedJson;
+    try {
+      http.Response response = await http.get("https://api.github.com/users/AjjuSingh/repos",headers: {
+        "Authorization" : "token $tokenTemp",
+        "Accept": "application/vnd.github.v3+json",
+      });
+
+      decodedJson = jsonDecode(response.body);
+    }
+    catch(e){
+      print(e);
+    }
+    return decodedJson;
   }
 }

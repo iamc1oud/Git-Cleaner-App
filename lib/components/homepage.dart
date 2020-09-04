@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:git_cleaner/api/git_api.dart';
+import 'package:git_cleaner/components/repo_list_view.dart';
 import 'package:git_cleaner/login/loginService.dart';
 import 'package:git_cleaner/models/user_model.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:dio/dio.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -50,17 +52,25 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                         ),
-                        Text(model.bio),
+                        Align(
+                          alignment: Alignment.center,
+                          child: Text(model.bio, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),),
+                        ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: getDrawerItems(model),
                           ),
-                        )
+                        ),
                       ],
                     );
               },),
+          ),
+          body: PageView(
+            children: [
+              RepositoryListView()
+            ],
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
@@ -117,44 +127,15 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ),
-      Card(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  new Text("Followers", style: titleStyle),
-                  new Text(model.followers.toString(), style: valueStyle,)
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  new Text("Following", style: titleStyle),
-                  new Text(model.following.toString(), style: valueStyle,)
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  new Text("Public repos", style: titleStyle),
-                  new Text(model.publicRepos.toString(), style: valueStyle,)
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  new Text("Public repos", style: titleStyle),
-                  new Text(model.publicGists.toString(), style: valueStyle,)
-                ],
-              )
-            ],
-          ),
-        ),
-      ),
-
     ];
+  }
+}
+
+launchUrl(String s) async{
+  String url = s;
+  if (await canLaunch(url)) {
+  await launch(url);
+  } else {
+  throw 'Could not launch $url';
   }
 }
