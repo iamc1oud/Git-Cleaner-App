@@ -6,7 +6,6 @@ import 'package:git_cleaner/login/loginService.dart';
 import 'package:git_cleaner/models/user_model.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
 
@@ -18,7 +17,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    String token = "773cf8d2c72bd8061435188da90f761cfffba097";
+    String token = "7df9aa0108c06befd1387601de129b8f3ee1555d ";
 
     GitApi gitApi = new GitApi();
 
