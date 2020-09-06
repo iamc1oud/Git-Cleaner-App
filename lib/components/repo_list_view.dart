@@ -53,6 +53,7 @@ class _RepositoryCardState extends State<RepositoryCard> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Material(
+        borderRadius: BorderRadius.circular(10),
         child: ExpansionTile(
           maintainState: true,
           title: Row(

@@ -7,6 +7,7 @@ import 'package:git_cleaner/models/user_model.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:dio/dio.dart';
+import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,7 +18,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    String token = "efd9b78e3e07fde56fdf994e7b5a55a513c09054";
+    String token = "773cf8d2c72bd8061435188da90f761cfffba097";
 
     GitApi gitApi = new GitApi();
 
@@ -73,10 +74,18 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
           floatingActionButton: FloatingActionButton(
-            onPressed: () {
-
+            onPressed: () async{
+              // Befire deleting ask for confirmation
+              try {
+                var client = await http.delete("https://api.github.com/repos/AjjuSingh/test",headers: {
+                  "Authorization" : "token 773cf8d2c72bd8061435188da90f761cfffba097",
+                  "Accept": "application/vnd.github.v3+json"
+                });
+              } catch(e){
+                print(e);
+              }
             },
-            child: new Icon(Icons.wifi),
+            child: new Icon(Icons.delete),
           ),
         );
       },
