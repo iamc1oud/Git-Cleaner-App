@@ -6,6 +6,7 @@ import 'package:git_cleaner/api/git_api.dart';
 import 'package:git_cleaner/components/login_form_widget.dart';
 import 'package:git_cleaner/login/loginService.dart';
 import 'package:git_cleaner/providers/repo_delete_provider.dart';
+import 'package:git_cleaner/style/const.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
@@ -33,7 +34,14 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Git Cleaner',
         theme: ThemeData(
-          scaffoldBackgroundColor: Colors.white,
+          iconTheme: IconThemeData(
+            color: Colors.white
+          ),
+          floatingActionButtonTheme: FloatingActionButtonThemeData(
+            backgroundColor: ColorSchemes().lightDark,
+            foregroundColor: ColorSchemes().bitDark
+          ),
+          brightness: Brightness.dark,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         home: AuthScreen(title: 'GitCleaner'),
@@ -59,12 +67,12 @@ class AuthScreen extends StatelessWidget {
                 "Git-Cleaner",
                 style: GoogleFonts.inconsolata(fontSize: 35),
               ),
-              Container(
+              /*Container(
                   height: 120,
                   child: Image(
                     image: NetworkImage(
                         "https://i.pinimg.com/originals/ef/03/f8/ef03f898ffa6f5eac9a37622cd73cd4b.gif"),
-                  ))
+                  ))*/
             ],
           ),
         ),
@@ -79,6 +87,7 @@ class AuthScreen extends StatelessWidget {
           Align(
             alignment: Alignment.center,
             child: Material(
+              elevation: 5,
                 borderRadius: BorderRadius.circular(10),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),

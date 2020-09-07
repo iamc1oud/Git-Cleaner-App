@@ -21,7 +21,7 @@ class LoginFormLayout extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25),
       child: Material(
-        elevation: 2,
+        elevation: 5,
         shadowColor: Colors.black.withOpacity(0.4),
         borderRadius: BorderRadius.circular(10),
         child: Consumer<LoginService>(
@@ -41,7 +41,7 @@ class LoginFormLayout extends StatelessWidget {
                         return null;
                       },
                       controller: usernameController,
-                      decoration: inputDecoration('Username', Icon(Icons.account_circle, color: const Color(0xFF2A2C34),))
+                      decoration: inputDecoration('Username', Icon(Icons.account_circle,))
                   ),
                   Divider(
                     height: 20,
@@ -59,13 +59,13 @@ class LoginFormLayout extends StatelessWidget {
                       onFieldSubmitted: (val){
                         print(val);
                       },
-                      decoration: inputDecoration('OAuth Token', Icon(Icons.vpn_key, color: const Color(0xFF2A2C34)),)
+                      decoration: inputDecoration('OAuth Token', Icon(Icons.vpn_key),)
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16.0),
                     child:FloatingActionButton.extended(
-                        backgroundColor: ConstFloatingActionButton().lightFabColor,
-                        icon: Icon(Icons.lock_open),
+                        backgroundColor: ColorSchemes().lightDark,
+                        icon: Icon(Icons.lock_open, color: Colors.white,),
                         onPressed: () {
                           if(_loginFormKey.currentState.validate()){
                             loginService.setUsername(usernameController.value.text);
@@ -73,7 +73,7 @@ class LoginFormLayout extends StatelessWidget {
                             Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
                           }
                         },
-                        label: new Text("Authorize"))
+                        label: new Text("Authorize", style: TextStyle(color: Colors.white),))
                   ),
                 ],
               ),
@@ -96,6 +96,7 @@ class LoginFormLayout extends StatelessWidget {
       labelStyle: TextStyle(
         color: Colors.grey,
       ),
+      focusColor: Colors.blue,
       prefixIcon: prefixIcon,
       labelText: labelText,
       suffixIcon: suffixIcon ?? SizedBox(),

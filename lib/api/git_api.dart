@@ -12,7 +12,7 @@ abstract class GitInterface {
 class GitApi implements GitInterface  {
   GitUserModel userModel;
 
-  String tokenTemp = "7df9aa0108c06befd1387601de129b8f3ee1555d ";
+  String tokenTemp = "2fbabb2bada7ae7ac0d8da6d51d4d716143f0008  ";
 
   @override
   Future<GitUserModel> getUserData(String token) async{
