@@ -18,7 +18,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin{
   @override
   Widget build(BuildContext context) {
-    String token = "7df9aa0108c06befd1387601de129b8f3ee1555d ";
+    String token = "44d29ba1d4cbc13f8d807f6a19659da02c7c5afe";
     GitApi gitApi = new GitApi();
 
     // TabController to check on which tab is currently switched
@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin{
                               padding: const EdgeInsets.only(top:24.0),
                               child: UserAccountsDrawerHeader(
                                 decoration: BoxDecoration(
-                                  color: Color(0xFF191414),
+                                  color: ColorSchemes().lightDark,
                                   borderRadius: BorderRadius.all(Radius.circular(10))
                                 ),
                                 accountName: Text(model.login),
@@ -129,10 +129,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin{
 
     return [
         Card(
+          color: ColorSchemes().bitDark,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
+                Text("Account Stats\n", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
