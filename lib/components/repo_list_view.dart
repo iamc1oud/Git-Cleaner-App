@@ -24,7 +24,7 @@ class _RepositoryListViewState extends State<RepositoryListView>
   Widget build(BuildContext context) {
     return Consumer<LoginService>(
       builder: (context, _loginService, child) => FutureBuilder(
-        future: gitApi.getUserRepository(_loginService.getToken, _loginService.getToken),
+        future: gitApi.getUserRepository(_loginService.getUsername, _loginService.getToken),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());

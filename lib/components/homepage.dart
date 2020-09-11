@@ -2,6 +2,7 @@ import 'package:ant_icons/ant_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:git_cleaner/api/git_api.dart';
+import 'package:git_cleaner/components/following_list_view.dart';
 import 'package:git_cleaner/components/repo_list_view.dart';
 import 'package:git_cleaner/login/loginService.dart';
 import 'package:git_cleaner/models/user_model.dart';
@@ -120,7 +121,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             body: TabBarView(
               controller: _tabController,
               physics: BouncingScrollPhysics(),
-              children: [RepositoryListView(), RepositoryListView(), RepositoryListView()],
+              children: [RepositoryListView(), FollowingListView(), RepositoryListView()],
             ),
             floatingActionButton: FloatingActionButton(
               onPressed: () async {

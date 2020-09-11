@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 abstract class GitInterface {
   void getUserData(String token) async {}
   void getUserRepository(String username, String token) async {}
+  void getUserFollowing(String token) async {}
 }
 
 class GitApi implements GitInterface {
@@ -39,6 +40,21 @@ class GitApi implements GitInterface {
       });
 
       decodedJson = jsonDecode(response.body);
+    } catch (e) {
+      print(e);
+    }
+    return decodedJson;
+  }
+
+  @override
+  Future<dynamic> getUserFollowing(String token) async {
+    var decodedJson;
+    try {
+      http.Response response = await http.get("https://api.github.com/user/following",
+          headers: {"Authorization": "token $token", "Accept": "application/vnd.github.v3+json"});
+
+      decodedJson = jsonDecode(response.body);
+      print(decodedJson.length);
     } catch (e) {
       print(e);
     }
