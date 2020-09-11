@@ -49,7 +49,6 @@ class _RepositoryListViewState extends State<RepositoryListView>
   }
 
   @override
-  // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
 }
 

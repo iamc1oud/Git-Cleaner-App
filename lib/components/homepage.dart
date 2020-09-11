@@ -6,7 +6,6 @@ import 'package:git_cleaner/components/repo_list_view.dart';
 import 'package:git_cleaner/login/loginService.dart';
 import 'package:git_cleaner/models/user_model.dart';
 import 'package:git_cleaner/style/const.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
@@ -19,17 +18,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-    String token = "44d29ba1d4cbc13f8d807f6a19659da02c7c5afe";
     GitApi gitApi = new GitApi();
 
     // TabController to check on which tab is currently switched
     TabController _tabController = new TabController(length: 3, vsync: this);
-
-    @override
-    void dispose() {
-      super.dispose();
-      _tabController.dispose();
-    }
 
     return Consumer<LoginService>(
       builder: (context, loginService, widget) {
@@ -134,7 +126,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               onPressed: () async {
                 // Befire deleting ask for confirmation
                 try {
-                  var client = await http.delete("https://api.github.com/repos/AjjuSingh/test", headers: {
+                  await http.delete("https://api.github.com/repos/AjjuSingh/test", headers: {
                     "Authorization": "token a9f74d8f746722df6a7b8580401f1bafec9f3fd7",
                     "Accept": "application/vnd.github.v3+json"
                   });
@@ -153,8 +145,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   List<Widget> getDrawerItems(GitUserModel model) {
     TextStyle titleStyle = TextStyle(fontSize: 16);
     TextStyle valueStyle = TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
-    DateFormat date = new DateFormat('yyyy-MM-dd');
-    String getCreationDate = date.format(DateTime.parse(model.createdAt));
 
     return [
       Card(

@@ -1,12 +1,11 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
-import 'package:git_cleaner/models/repo_model.dart';
 import 'package:git_cleaner/models/user_model.dart';
 import 'package:http/http.dart' as http;
 
 abstract class GitInterface {
-  Future<GitUserModel> getUserData(String token) async {}
-  Future<dynamic> getUserRepository(String username, String token) async {}
+  void getUserData(String token) async {}
+  void getUserRepository(String username, String token) async {}
 }
 
 class GitApi implements GitInterface {

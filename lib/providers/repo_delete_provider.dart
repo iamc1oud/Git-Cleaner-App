@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-class RepositoryDeleteProvider extends ChangeNotifier implements ReassembleHandler {
+class RepositoryDeleteProvider extends ChangeNotifier {
   Set<String> _listOfRepos = new Set<String>();
 
   Set<String> get _getListOfRepos => _listOfRepos;
@@ -16,10 +15,5 @@ class RepositoryDeleteProvider extends ChangeNotifier implements ReassembleHandl
     _getListOfRepos.remove(url);
     print(_listOfRepos);
     notifyListeners();
-  }
-
-  @override
-  void reassemble() {
-    // TODO: implement reassemble
   }
 }
