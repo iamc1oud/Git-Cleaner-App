@@ -17,7 +17,6 @@ class LoginFormLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25),
       child: Material(
@@ -34,21 +33,24 @@ class LoginFormLayout extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   TextFormField(
-                      validator: (String val){
-                        if(val.isEmpty){
+                      validator: (String val) {
+                        if (val.isEmpty) {
                           return "Must enter username";
                         }
                         return null;
                       },
                       controller: usernameController,
-                      decoration: inputDecoration('Username', Icon(Icons.account_circle,))
-                  ),
+                      decoration: inputDecoration(
+                          'Username',
+                          Icon(
+                            Icons.account_circle,
+                          ))),
                   Divider(
                     height: 20,
                   ),
                   TextFormField(
-                      validator: (String val){
-                        if(val.isEmpty){
+                      validator: (String val) {
+                        if (val.isEmpty) {
                           return "Must enter oauth token";
                         }
                         return null;
@@ -56,25 +58,32 @@ class LoginFormLayout extends StatelessWidget {
                       controller: oauthController,
                       obscureText: true,
                       obscuringCharacter: "*",
-                      onFieldSubmitted: (val){
+                      onFieldSubmitted: (val) {
                         print(val);
                       },
-                      decoration: inputDecoration('OAuth Token', Icon(Icons.vpn_key),)
-                  ),
+                      decoration: inputDecoration(
+                        'OAuth Token',
+                        Icon(Icons.vpn_key),
+                      )),
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 16.0),
-                    child:FloatingActionButton.extended(
-                        backgroundColor: ColorSchemes().lightDark,
-                        icon: Icon(Icons.lock_open, color: Colors.white,),
-                        onPressed: () {
-                          if(_loginFormKey.currentState.validate()){
-                            loginService.setUsername(usernameController.value.text);
-                            loginService.setOauthToken(usernameController.value.text);
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
-                          }
-                        },
-                        label: new Text("Authorize", style: TextStyle(color: Colors.white),))
-                  ),
+                      padding: const EdgeInsets.symmetric(vertical: 16.0),
+                      child: FloatingActionButton.extended(
+                          backgroundColor: ColorSchemes().lightDark,
+                          icon: Icon(
+                            Icons.lock_open,
+                            color: Colors.white,
+                          ),
+                          onPressed: () {
+                            if (_loginFormKey.currentState.validate()) {
+                              loginService.setUsername(usernameController.value.text);
+                              loginService.setOauthToken(oauthController.value.text);
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+                            }
+                          },
+                          label: new Text(
+                            "Authorize",
+                            style: TextStyle(color: Colors.white),
+                          ))),
                 ],
               ),
             );
@@ -84,7 +93,7 @@ class LoginFormLayout extends StatelessWidget {
     );
   }
 
-  InputDecoration inputDecoration(String labelText, Icon prefixIcon, {Icon suffixIcon}){
+  InputDecoration inputDecoration(String labelText, Icon prefixIcon, {Icon suffixIcon}) {
     return InputDecoration(
       border: InputBorder.none,
       /*enabledBorder: const OutlineInputBorder(
@@ -104,14 +113,14 @@ class LoginFormLayout extends StatelessWidget {
   }
 
   Widget submitBtn({BuildContext context}) {
-  return FloatingActionButton.extended(
-  backgroundColor: ConstFloatingActionButton().lightFabColor,
-  icon: Icon(Icons.lock_open),
-  onPressed: () {
-    if(_loginFormKey.currentState.validate()){
-      Scaffold.of(context).showSnackBar(SnackBar(content: Text("Logging in")));
-    }
-  },
-  label: new Text("Authorize"));
-}
+    return FloatingActionButton.extended(
+        backgroundColor: ConstFloatingActionButton().lightFabColor,
+        icon: Icon(Icons.lock_open),
+        onPressed: () {
+          if (_loginFormKey.currentState.validate()) {
+            Scaffold.of(context).showSnackBar(SnackBar(content: Text("Logging in")));
+          }
+        },
+        label: new Text("Authorize"));
+  }
 }

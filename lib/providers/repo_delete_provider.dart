@@ -6,13 +6,13 @@ class RepositoryDeleteProvider extends ChangeNotifier implements ReassembleHandl
 
   Set<String> get _getListOfRepos => _listOfRepos;
 
-  void addRepo(String url){
+  void addRepo(String url) {
     _getListOfRepos.add(url);
     print(_getListOfRepos);
     notifyListeners();
   }
 
-  void deleteRepo(String url){
+  void deleteRepo(String url) {
     _getListOfRepos.remove(url);
     print(_listOfRepos);
     notifyListeners();

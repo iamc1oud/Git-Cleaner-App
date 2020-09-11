@@ -9,28 +9,22 @@ abstract class GitInterface {
   Future<dynamic> getUserRepository(String username, String token) async {}
 }
 
-class GitApi implements GitInterface  {
+class GitApi implements GitInterface {
   GitUserModel userModel;
 
   String tokenTemp = "44d29ba1d4cbc13f8d807f6a19659da02c7c5afe";
 
   @override
-  Future<GitUserModel> getUserData(String token) async{
+  Future<GitUserModel> getUserData(String token) async {
     String url = "https://api.github.com/user";
 
     try {
-      Response response = await Dio(
-        BaseOptions(
-          headers: {
-            "Authorization" : "token $tokenTemp",
-            "Accept": "application/vnd.github.v3+json"
-          }
-        )
-      ).get(url);
+      Response response =
+          await Dio(BaseOptions(headers: {"Authorization": "token $token", "Accept": "application/vnd.github.v3+json"}))
+              .get(url);
       final resultReponse = json.decode(response.toString());
       userModel = GitUserModel.fromJson(resultReponse);
-    }
-    catch(e){
+    } catch (e) {
       print(e);
     }
     return userModel;
@@ -40,14 +34,13 @@ class GitApi implements GitInterface  {
   Future<dynamic> getUserRepository(String username, String token) async {
     var decodedJson;
     try {
-      http.Response response = await http.get("https://api.github.com/users/AjjuSingh/repos",headers: {
-        "Authorization" : "token $tokenTemp",
+      http.Response response = await http.get("https://api.github.com/users/AjjuSingh/repos", headers: {
+        "Authorization": "token $token",
         "Accept": "application/vnd.github.v3+json",
       });
 
       decodedJson = jsonDecode(response.body);
-    }
-    catch(e){
+    } catch (e) {
       print(e);
     }
     return decodedJson;

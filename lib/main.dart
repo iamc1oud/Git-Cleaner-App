@@ -2,10 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:git_cleaner/api/git_api.dart';
 import 'package:git_cleaner/components/login_form_widget.dart';
 import 'package:git_cleaner/login/loginService.dart';
-import 'package:git_cleaner/providers/repo_delete_provider.dart';
 import 'package:git_cleaner/style/const.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
@@ -34,13 +32,9 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Git Cleaner',
         theme: ThemeData(
-          iconTheme: IconThemeData(
-            color: Colors.white
-          ),
+          iconTheme: IconThemeData(color: Colors.white),
           floatingActionButtonTheme: FloatingActionButtonThemeData(
-            backgroundColor: ColorSchemes().lightDark,
-            foregroundColor: ColorSchemes().bitDark
-          ),
+              backgroundColor: ColorSchemes().lightDark, foregroundColor: Colors.white),
           brightness: Brightness.dark,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
@@ -87,7 +81,7 @@ class AuthScreen extends StatelessWidget {
           Align(
             alignment: Alignment.center,
             child: Material(
-              elevation: 5,
+                elevation: 5,
                 borderRadius: BorderRadius.circular(10),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -102,12 +96,12 @@ class AuthScreen extends StatelessWidget {
                             throw 'Could not launch $url';
                           }
                         }
+
                         _launchUrl();
                       },
                       child: Text(
                         "Generate a new token",
-                        style:
-                            TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                       )),
                 )),
           )
