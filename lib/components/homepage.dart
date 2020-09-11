@@ -1,3 +1,4 @@
+import 'package:ant_icons/ant_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:git_cleaner/api/git_api.dart';
@@ -33,11 +34,17 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     return Consumer<LoginService>(
       builder: (context, loginService, widget) {
         return DefaultTabController(
-          length: 2,
+          length: 3,
           child: Scaffold(
             backgroundColor: ColorSchemes().bitDark,
             appBar: AppBar(
               title: new Text(loginService.getUsername),
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Icon(AntIcons.bulb_outline),
+                )
+              ],
               bottom: TabBar(
                 controller: _tabController,
                 tabs: [
@@ -67,38 +74,52 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   }
 
                   GitUserModel model = snapshot.data;
-                  return ListView(
-                    padding: EdgeInsets.zero,
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 24.0),
-                          child: UserAccountsDrawerHeader(
-                            decoration: BoxDecoration(
-                                color: ColorSchemes().lightDark, borderRadius: BorderRadius.all(Radius.circular(10))),
-                            accountName: Text(model.login),
-                            accountEmail: Text(model.email),
-                            currentAccountPicture: CircleAvatar(
-                              backgroundImage: NetworkImage(model.avatarUrl),
+                      Expanded(
+                        child: ListView(
+                          padding: EdgeInsets.zero,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 24.0),
+                                child: UserAccountsDrawerHeader(
+                                  decoration: BoxDecoration(
+                                      color: ColorSchemes().lightDark,
+                                      borderRadius: BorderRadius.all(Radius.circular(10))),
+                                  accountName: Text(model.login),
+                                  accountEmail: Text(model.email),
+                                  currentAccountPicture: CircleAvatar(
+                                    backgroundImage: NetworkImage(model.avatarUrl),
+                                  ),
+                                ),
+                              ),
                             ),
-                          ),
+                            Align(
+                              alignment: Alignment.center,
+                              child: Text(
+                                model.bio,
+                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: getDrawerItems(model),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      Align(
-                        alignment: Alignment.center,
-                        child: Text(
-                          model.bio,
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: getDrawerItems(model),
-                        ),
-                      ),
+                      RaisedButton(
+                        onPressed: () {
+                          print("Go to main screen");
+                        },
+                        child: Text("Logout"),
+                      )
                     ],
                   );
                 },
